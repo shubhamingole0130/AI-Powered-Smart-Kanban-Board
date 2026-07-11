@@ -11,16 +11,67 @@
   </header>
 
   <main class="board">
-    <section class="column" id="todo">
-      <h2>To Do</h2>
-    </section>
-    <section class="column" id="in-progress">
-      <h2>In Progress</h2>
-    </section>
-    <section class="column" id="done">
-      <h2>Done</h2>
-    </section>
-  </main>
+
+  <section class="column" id="todo">
+    <h2>To Do <span class="count">2</span></h2>
+
+
+    <div class="card">
+      <span class="label label-bug">Bug</span>
+      <h3 class="card-title">Fix login page error</h3>
+      <p class="card-desc">Users getting 401 on fresh login</p>
+      <div class="card-footer">
+        <span class="assignee">Rahul</span>
+        <span class="priority priority-high">High</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="label label-feature">Feature</span>
+      <h3 class="card-title">Add dark mode toggle</h3>
+      <p class="card-desc">User preference saved in localStorage</p>
+      <div class="card-footer">
+        <span class="assignee">Priya</span>
+        <span class="priority priority-medium">Medium</span>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="column" id="in-progress">
+   
+<h2>In Progress <span class="count">1</span></h2>
+
+
+    <div class="card">
+      <span class="label label-design">Design</span>
+      <h3 class="card-title">Redesign dashboard layout</h3>
+      <p class="card-desc">New wireframes approved, start implementation</p>
+      <div class="card-footer">
+        <span class="assignee">Rahul</span>
+        <span class="priority priority-high">High</span>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="column" id="done">
+   
+<h2>Done <span class="count">1</span></h2>
+
+    <div class="card">
+      <span class="label label-feature">Feature</span>
+      <h3 class="card-title">Setup project repo</h3>
+      <p class="card-desc">Initialized Git, pushed to GitHub</p>
+      <div class="card-footer">
+        <span class="assignee">Priya</span>
+        <span class="priority priority-low">Low</span>
+      </div>
+    </div>
+
+  </section>
+
+</main>
 
   <script src="script.js"></script>
 </body>

@@ -122,6 +122,166 @@ header {
   margin-left: 6px;
   font-weight: 500;
 }
+/* ---- ADD BUTTON ---- */
+.add-btn {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  background: transparent;
+  border: 1.5px dashed #ccc;
+  border-radius: 6px;
+  color: #888;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.add-btn:hover {
+  background: #f0f0f0;
+  border-color: #aaa;
+  color: #444;
+}
+/* ---- MODAL OVERLAY ---- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ---- MODAL BOX ---- */
+.modal {
+  background: white;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 420px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  transform: translateY(-10px);
+  transition: transform 0.2s;
+}
+
+.modal-overlay.active .modal {
+  transform: translateY(0);
+}
+
+/* ---- MODAL HEADER ---- */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.modal-header h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: #888;
+  line-height: 1;
+}
+
+.close-btn:hover {
+  color: #333;
+}
+
+/* ---- MODAL FORM FIELDS ---- */
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.modal-body label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #555;
+  margin-top: 0.4rem;
+}
+
+.required {
+  color: #e74c3c;
+  margin-left: 2px;
+}
+
+.modal-body input,
+.modal-body textarea,
+.modal-body select {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: #333;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.modal-body input:focus,
+.modal-body textarea:focus,
+.modal-body select:focus {
+  border-color: #2c2c2c;
+}
+
+.modal-body textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* ---- MODAL FOOTER ---- */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.btn-cancel {
+  padding: 0.5rem 1rem;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: #555;
+}
+
+.btn-cancel:hover {
+  background: #e0e0e0;
+}
+
+.btn-submit {
+  padding: 0.5rem 1.25rem;
+  background: #2c2c2c;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: white;
+  font-weight: 600;
+}
+
+.btn-submit:hover {
+  background: #444;
+}
 /* making it scroll free on smaller devices*/
 @media (max-width: 768px) {
   .board {

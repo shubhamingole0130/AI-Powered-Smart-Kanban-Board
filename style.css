@@ -288,3 +288,10 @@ header {
     flex-direction: column;
   }
 }
+
+.empty-msg {
+  font-size: 0.8rem;
+  color: #bbb;
+  text-align: center;
+  padding: 1.5rem 0;
+}

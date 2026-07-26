@@ -48,6 +48,7 @@ function buildCard(task) {
   return `
     <div class="card" data-id="${task.id}">
       <span class="label label-${task.label}">${task.label}</span>
+       <button class="delete-btn" data-id="${task.id}" title="Delete task">&times;</button>
       <h3 class="card-title">${task.title}</h3>
       <p class="card-desc">${task.desc}</p>
       <div class="card-footer">
@@ -83,12 +84,74 @@ function render() {
 
     // Update the count badge
     document.getElementById(`count-${col}`).textContent = colTasks.length;
+
+     container.addEventListener('click', (e) => {
+      if (e.target.classList.contains('delete-btn')) {
+        const idToDelete = Number(e.target.dataset.id);
+        tasks = tasks.filter(t => t.id !== idToDelete);
+        render();
+      }
+    });
   });
+}
+
+// ============================================
+// CREATE TASK — reads modal form, adds to state
+// ============================================
+function createTask() {
+  // Read values from form
+  const title    = document.getElementById('taskTitle').value.trim();
+  const desc     = document.getElementById('taskDesc').value.trim();
+  const label    = document.getElementById('taskLabel').value;
+  const assignee = document.getElementById('taskAssignee').value.trim();
+  const priority = document.getElementById('taskPriority').value;
+
+  // Validate — title is required
+  if (!title) {
+    alert('Please enter a task title');
+    return; // stop here, don't create task
+  }
+
+  // Build new task object
+  const newTask = {
+    id: Date.now(),        // unique ID using timestamp
+    title,                 // shorthand for title: title
+    desc:     desc || 'No description',
+    label:    label || 'feature',
+    assignee: assignee || 'Unassigned',
+    priority: priority || 'medium',
+    column:   activeColumn  // which column button was clicked
+  };
+
+  // Push into state array
+  tasks.push(newTask);
+
+  // Re-render board
+  render();
+
+  // Close modal and reset form
+  closeModalFn();
+}
+
+function closeModalFn() {
+  modalOverlay.classList.remove('active');
+  document.getElementById('taskTitle').value    = '';
+  document.getElementById('taskDesc').value     = '';
+  document.getElementById('taskAssignee').value = '';
+  document.getElementById('taskLabel').value    = 'feature';
+  document.getElementById('taskPriority').value = 'medium';
 }
 // Select elements
 const modalOverlay = document.getElementById('modalOverlay');
-const closeModal   = document.getElementById('closeModal');
-const cancelModal  = document.getElementById('cancelModal');
+closeModal.addEventListener('click', closeModalFn);
+cancelModal.addEventListener('click', closeModalFn);
+document.getElementById('submitTask').addEventListener('click', createTask);
+document.getElementById('taskTitle').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') createTask();
+});
+modalOverlay.addEventListener('click', (e) => {
+  if (e.target === modalOverlay) closeModalFn();
+});
 const addBtns      = document.querySelectorAll('.add-btn');
 
 // Track which column the button was clicked from

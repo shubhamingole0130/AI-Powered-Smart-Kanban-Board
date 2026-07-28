@@ -3,44 +3,25 @@
 // ============================================
 // STATE — single source of truth for all tasks
 // ============================================
-let tasks = [
-  {
-    id: 1,
-    title: "Fix login page error",
-    desc: "Users getting 401 on fresh login",
-    label: "bug",
-    assignee: "Rahul",
-    priority: "high",
-    column: "todo"
-  },
-  {
-    id: 2,
-    title: "Add dark mode toggle",
-    desc: "User preference saved in localStorage",
-    label: "feature",
-    assignee: "Priya",
-    priority: "medium",
-    column: "todo"
-  },
-  {
-    id: 3,
-    title: "Redesign dashboard layout",
-    desc: "New wireframes approved, start implementation",
-    label: "design",
-    assignee: "Rahul",
-    priority: "high",
-    column: "in-progress"
-  },
-  {
-    id: 4,
-    title: "Setup project repo",
-    desc: "Initialized Git, pushed to GitHub",
-    label: "feature",
-    assignee: "Priya",
-    priority: "low",
-    column: "done"
+let tasks = [];
+// ============================================
+// SAVE — writes tasks array to localStorage
+// ============================================
+function saveTasks() {
+  localStorage.setItem('kanban-tasks', JSON.stringify(tasks));
+}
+// ============================================
+// LOAD — reads tasks from localStorage on startup
+// ============================================
+function loadTasks() {
+  const stored = localStorage.getItem('kanban-tasks');
+
+  if (stored) {
+    // Data exists — parse it back into an array
+    tasks = JSON.parse(stored);
   }
-];
+  // If nothing stored yet, tasks stays as the default array
+}
 // ============================================
 // BUILD A SINGLE CARD — returns an HTML string
 // ============================================
@@ -89,6 +70,7 @@ function render() {
       if (e.target.classList.contains('delete-btn')) {
         const idToDelete = Number(e.target.dataset.id);
         tasks = tasks.filter(t => t.id !== idToDelete);
+        saveTasks();
         render();
       }
     });
@@ -126,6 +108,7 @@ function createTask() {
   // Push into state array
   tasks.push(newTask);
 
+  saveTasks();
   // Re-render board
   render();
 
@@ -183,5 +166,7 @@ modalOverlay.addEventListener('click', (e) => {
 });
 
 console.log("Kanban app loaded ✅");
+
+loadTasks();
 //calling render fn()
 render();

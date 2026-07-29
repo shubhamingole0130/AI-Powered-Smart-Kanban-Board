@@ -313,6 +313,25 @@ header {
   color: #e74c3c;
 }
 
+  /* ---- EDIT BUTTON ---- */
+.edit-btn {
+  margin-top: 0.5rem;
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  cursor: pointer;
+  color: #666;
+  transition: all 0.2s;
+}
+
+.edit-btn:hover {
+  background: #f5f5f5;
+  border-color: #aaa;
+  color: #333;
+}
+
 .empty-msg {
   font-size: 0.8rem;
   color: #bbb;

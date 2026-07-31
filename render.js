@@ -11,6 +11,7 @@ export function buildCard(task) {
     <div class="card" data-id="${task.id}" draggable="true">
       <div class="card-top">
         <span class="label label-${task.label}">${task.label}</span>
+         <span class="drag-handle" title="Drag to move">⠿</span>
         <button class="delete-btn" data-id="${task.id}" draggable="false" title="Delete">&times;</button>
 
       </div>
@@ -20,6 +21,7 @@ export function buildCard(task) {
         <span class="assignee">${task.assignee}</span>
         <span class="priority priority-${task.priority}">${task.priority}</span>
       </div>
+      
       <button class="edit-btn" data-id="${task.id}" draggable="false">✏️ Edit</button>
     </div>
   `;

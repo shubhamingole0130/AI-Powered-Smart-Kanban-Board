@@ -60,6 +60,7 @@ header {
 
 .card:hover {
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
 }
 
 .card-title {
@@ -357,7 +358,67 @@ header {
 .card:active {
   cursor: grabbing;
 }
+/* ---- DROP PLACEHOLDER ---- */
+.drop-placeholder {
+  height: 70px;
+  border: 2px dashed #4a90d9;
+  border-radius: 6px;
+  background: #f0f7ff;
+  margin-bottom: 0.75rem;
+  transition: all 0.15s ease;
+  animation: pulse 1s infinite alternate;
+}
 
+@keyframes pulse {
+  from { opacity: 0.5; }
+  to   { opacity: 1;   }
+}
+
+/* ---- CARD TRANSITIONS ---- */
+.card {
+  transition: transform 0.15s ease,
+              opacity 0.15s ease,
+              box-shadow 0.15s ease;
+}
+
+/* ---- DRAGGING STATE ---- */
+.card.dragging {
+  opacity: 0.3;
+  transform: rotate(1.5deg) scale(1.02);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  cursor: grabbing;
+}
+
+/* ---- COLUMN DRAG OVER ---- */
+.column.drag-over {
+  background: #f5faff;
+  border: 2px dashed #4a90d9;
+  border-radius: 8px;
+  transition: all 0.15s ease;
+}
+/* ---- PREVENT TEXT SELECTION WHILE DRAGGING ---- */
+.board.dragging-active * {
+  user-select: none;
+}
+/* ---- CARD ACTIONS (top right) ---- */
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ---- DRAG HANDLE ---- */
+.drag-handle {
+  color: #ccc;
+  font-size: 1rem;
+  cursor: grab;
+  padding: 0 2px;
+  transition: color 0.2s;
+}
+
+.drag-handle:hover {
+  color: #888;
+}
 .empty-msg {
   font-size: 0.8rem;
   color: #bbb;

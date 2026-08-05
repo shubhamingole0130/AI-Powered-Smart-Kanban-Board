@@ -67,47 +67,21 @@ export function setupDragOnCards() {
 
   });
 }
-column.addEventListener('drop', (e) => {
-  e.preventDefault();
-  column.classList.remove('drag-over');
 
-  const newColumn = column.id;
-  const id = Number(e.dataTransfer.getData('text/plain'));
-
-  if (placeholder && placeholder.parentNode) {
-    placeholder.parentNode.removeChild(placeholder);
-    placeholder = null;
-  }
-
-  if (id && newColumn) {
-    // Find current column of dragged task
-    const currentTask = tasks.find(t => t.id === id);
-
-    // Only update if column actually changed
-    if (currentTask && currentTask.column !== newColumn) {
-      updateTask(id, { column: newColumn });
-      render();
-      setupDragOnCards();
-      setupDropZones();
-    }
-  }
-});
 
 // ---- SETUP DROP ZONES ON COLUMNS ----
 export function setupDropZones() {
-  document.querySelectorAll('.column').forEach(column => {
-    const container = column.querySelector('.cards-container');
+  document.querySelectorAll('.column').forEach(col => {  // renamed to col
+    const container = col.querySelector('.cards-container');
 
-    column.addEventListener('dragover', (e) => {
+    col.addEventListener('dragover', (e) => {
       e.preventDefault();
-      column.classList.add('drag-over');
+      col.classList.add('drag-over');
 
-      // Create placeholder if it doesn't exist yet
       if (!placeholder) {
         placeholder = createPlaceholder();
       }
 
-      // Find where to insert the placeholder
       const afterElement = getDragAfterElement(container, e.clientY);
 
       if (afterElement) {
@@ -117,35 +91,37 @@ export function setupDropZones() {
       }
     });
 
-    column.addEventListener('dragleave', (e) => {
-      if (!column.contains(e.relatedTarget)) {
-        column.classList.remove('drag-over');
+    col.addEventListener('dragleave', (e) => {
+      if (!col.contains(e.relatedTarget)) {
+        col.classList.remove('drag-over');
 
-        // Remove placeholder when leaving column
         if (placeholder && placeholder.parentNode === container) {
           container.removeChild(placeholder);
         }
       }
     });
 
-    column.addEventListener('drop', (e) => {
+    col.addEventListener('drop', (e) => {
       e.preventDefault();
-      column.classList.remove('drag-over');
+      col.classList.remove('drag-over');  // ✅ now correctly using col
 
-      const newColumn = column.id;
+      const newColumn = col.id;
       const id = Number(e.dataTransfer.getData('text/plain'));
 
-      // Remove placeholder
       if (placeholder && placeholder.parentNode) {
         placeholder.parentNode.removeChild(placeholder);
         placeholder = null;
       }
 
       if (id && newColumn) {
-        updateTask(id, { column: newColumn });
-        render();
-        setupDragOnCards();
-        setupDropZones();
+        const currentTask = tasks.find(t => t.id === id);
+
+        if (currentTask && currentTask.column !== newColumn) {
+          updateTask(id, { column: newColumn });
+          render();
+          setupDragOnCards();
+          setupDropZones();
+        }
       }
     });
 

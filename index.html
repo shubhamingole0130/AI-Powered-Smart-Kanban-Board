@@ -10,6 +10,38 @@
     <h1>Smart Kanban Board</h1>
   </header>
 
+<!-- FILTER BAR -->
+<div class="filter-bar">
+
+  <div class="filter-group">
+    <span class="filter-label">Priority:</span>
+    <button class="filter-btn active" data-filter="priority" data-value="">All</button>
+    <button class="filter-btn" data-filter="priority" data-value="high">High</button>
+    <button class="filter-btn" data-filter="priority" data-value="medium">Medium</button>
+    <button class="filter-btn" data-filter="priority" data-value="low">Low</button>
+  </div>
+
+  <div class="filter-group">
+    <span class="filter-label">Label:</span>
+    <button class="filter-btn active" data-filter="label" data-value="">All</button>
+    <button class="filter-btn" data-filter="label" data-value="bug">Bug</button>
+    <button class="filter-btn" data-filter="label" data-value="feature">Feature</button>
+    <button class="filter-btn" data-filter="label" data-value="design">Design</button>
+  </div>
+
+  <div class="filter-group">
+    <span class="filter-label">Assignee:</span>
+    <input
+      type="text"
+      id="assigneeFilter"
+      placeholder="Search assignee..."
+      class="filter-input"
+    />
+  </div>
+
+  <button class="clear-filters-btn" id="clearFilters">✕ Clear Filters</button>
+<span class="filter-results" id="filterResults"></span>
+</div>
 
  <main class="board">
 

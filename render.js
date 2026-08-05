@@ -4,6 +4,7 @@
 import { setupDragOnCards, setupDropZones } from './drag.js';
 import { tasks } from './state.js';
 import { openEditModal } from './modal.js';
+import { getFilteredTasks ,activeFilters} from './filters.js';
 
 export function buildCard(task) {
   return `
@@ -31,37 +32,56 @@ export function render() {
   const columns = ['todo', 'in-progress', 'done'];
 
   columns.forEach(col => {
-    const colTasks = tasks.filter(t => t.column === col);
+    const colTasks = getFilteredTasks().filter(t => t.column === col);
     const container = document.getElementById(`cards-${col}`);
-      setupDragOnCards();
-  setupDropZones();
 
+    // Wipe container
     container.innerHTML = '';
 
     if (colTasks.length === 0) {
-      container.innerHTML = `<p class="empty-msg">No tasks here</p>`;
+      // Show empty message
+      const isFiltering = Object.values(activeFilters).some(v => v !== '');
+      container.innerHTML = `
+        <p class="empty-msg">
+          ${isFiltering ? '🔍 No matching tasks' : 'No tasks here'}
+        </p>
+      `;
     } else {
+      // ✅ Draw cards — this was completely missing
       colTasks.forEach(task => {
         container.innerHTML += buildCard(task);
       });
     }
 
+    // Update count badge
     document.getElementById(`count-${col}`).textContent = colTasks.length;
 
-    // Delete — event delegation
+    // Event delegation for delete and edit
     container.addEventListener('click', (e) => {
-      // Delete button
       if (e.target.classList.contains('delete-btn')) {
         const id = Number(e.target.dataset.id);
         deleteTaskAndRender(id);
       }
-      // Edit button
       if (e.target.classList.contains('edit-btn')) {
         const id = Number(e.target.dataset.id);
         openEditModal(id);
       }
     });
   });
+
+  // Setup drag after cards are drawn
+  setupDragOnCards();
+  setupDropZones();
+
+  // Update filter results count
+  const total = getFilteredTasks().length;
+  const resultsEl = document.getElementById('filterResults');
+  if (resultsEl) {
+    const isFiltering = Object.values(activeFilters).some(v => v !== '');
+    resultsEl.textContent = isFiltering
+      ? `${total} task${total !== 1 ? 's' : ''} found`
+      : '';
+  }
 }
 
 // Helper to avoid circular imports

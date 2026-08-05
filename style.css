@@ -419,6 +419,90 @@ header {
 .drag-handle:hover {
   color: #888;
 }
+
+/* ---- FILTER BAR ---- */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 2rem;
+  background: white;
+  border-bottom: 1px solid #eee;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.filter-label {
+  font-size: 0.8rem;
+  color: #888;
+  font-weight: 600;
+  margin-right: 2px;
+}
+
+/* ---- FILTER BUTTONS ---- */
+.filter-btn {
+  padding: 4px 12px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  background: white;
+  font-size: 0.78rem;
+  cursor: pointer;
+  color: #555;
+  transition: all 0.15s;
+}
+
+.filter-btn:hover {
+  border-color: #aaa;
+  color: #222;
+}
+
+.filter-btn.active {
+  background: #2c2c2c;
+  color: white;
+  border-color: #2c2c2c;
+}
+
+/* ---- ASSIGNEE SEARCH INPUT ---- */
+.filter-input {
+  padding: 4px 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  outline: none;
+  width: 150px;
+  transition: border 0.2s;
+}
+
+.filter-input:focus {
+  border-color: #2c2c2c;
+}
+
+/* ---- CLEAR BUTTON ---- */
+.clear-filters-btn {
+  padding: 4px 12px;
+  border: 1px solid #ffcccc;
+  border-radius: 20px;
+  background: #fff5f5;
+  color: #e74c3c;
+  font-size: 0.78rem;
+  cursor: pointer;
+  margin-left: auto;
+  transition: all 0.15s;
+}
+
+.clear-filters-btn:hover {
+  background: #ffe0e0;
+}
+.filter-results {
+  font-size: 0.78rem;
+  color: #888;
+  font-style: italic;
+}
 .empty-msg {
   font-size: 0.8rem;
   color: #bbb;

@@ -4,6 +4,7 @@
 
 import { updateTask, tasks } from './state.js';
 import { render } from './render.js';
+import { logActivity } from './activity.js';
 
 let draggedId   = null;
 let placeholder = null;
@@ -115,6 +116,17 @@ export function setupDropZones() {
 
       if (id && newColumn) {
         const currentTask = tasks.find(t => t.id === id);
+
+         const colNames = {
+        'todo': 'To Do',
+        'in-progress': 'In Progress',
+        'done': 'Done'
+      };
+
+      logActivity(
+        'moved',
+        `<strong>${currentTask.assignee}</strong> moved "<strong>${currentTask.title}</strong>" to <strong>${colNames[newColumn]}</strong>`
+      );
 
         if (currentTask && currentTask.column !== newColumn) {
           updateTask(id, { column: newColumn });

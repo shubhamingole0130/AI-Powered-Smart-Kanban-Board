@@ -11,7 +11,10 @@ export function saveTasks() {
 export function loadTasks() {
   const stored = localStorage.getItem('kanban-tasks');
   if (stored) {
-    tasks = JSON.parse(stored);
+    // ✅ Mutate in place instead of reassigning
+    const parsed = JSON.parse(stored);
+    tasks.length = 0;                    // wipe array
+    parsed.forEach(t => tasks.push(t)); // refill it
   }
 }
 
@@ -21,11 +24,17 @@ export function addTask(newTask) {
 }
 
 export function deleteTask(id) {
-  tasks = tasks.filter(t => t.id !== id);
+  // ✅ Mutate in place
+  const index = tasks.findIndex(t => t.id === id);
+  if (index !== -1) tasks.splice(index, 1);
   saveTasks();
 }
 
 export function updateTask(id, updatedFields) {
-  tasks = tasks.map(t => t.id === id ? { ...t, ...updatedFields } : t);
+  // ✅ Mutate in place
+  const index = tasks.findIndex(t => t.id === id);
+  if (index !== -1) {
+    tasks[index] = { ...tasks[index], ...updatedFields };
+  }
   saveTasks();
 }

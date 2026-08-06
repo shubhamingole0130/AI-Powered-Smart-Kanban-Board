@@ -43,28 +43,41 @@
 <span class="filter-results" id="filterResults"></span>
 </div>
 
- <main class="board">
+<!-- main class board  -->
+<div class="app-layout">
 
-  <section class="column" id="todo">
-    <h2>To Do <span class="count" id="count-todo">0</span></h2>
-    <div class="cards-container" id="cards-todo"></div>
-    <button class="add-btn" data-column="todo">+ Add Task</button>
-  </section>
+  <main class="board">
+    <section class="column" id="todo">
+      <h2>To Do <span class="count" id="count-todo">0</span></h2>
+      <div class="cards-container" id="cards-todo"></div>
+      <button class="add-btn" data-column="todo">+ Add Task</button>
+    </section>
 
-  <section class="column" id="in-progress">
-    <h2>In Progress <span class="count" id="count-in-progress">0</span></h2>
-    <div class="cards-container" id="cards-in-progress"></div>
-    <button class="add-btn" data-column="in-progress">+ Add Task</button>
-  </section>
+    <section class="column" id="in-progress">
+      <h2>In Progress <span class="count" id="count-in-progress">0</span></h2>
+      <div class="cards-container" id="cards-in-progress"></div>
+      <button class="add-btn" data-column="in-progress">+ Add Task</button>
+    </section>
 
-  <section class="column" id="done">
-    <h2>Done <span class="count" id="count-done">0</span></h2>
-    <div class="cards-container" id="cards-done"></div>
-    <button class="add-btn" data-column="done">+ Add Task</button>
-  </section>
+    <section class="column" id="done">
+      <h2>Done <span class="count" id="count-done">0</span></h2>
+      <div class="cards-container" id="cards-done"></div>
+      <button class="add-btn" data-column="done">+ Add Task</button>
+    </section>
+  </main>
 
-</main>
+  <!-- ACTIVITY SIDEBAR -->
+  <aside class="activity-sidebar" id="activitySidebar">
+    <div class="sidebar-header">
+      <h3>Activity</h3>
+      <button class="clear-feed-btn" id="clearFeed">Clear</button>
+    </div>
+    <ul class="activity-feed" id="activityFeed">
+      <li class="feed-empty">No activity yet</li>
+    </ul>
+  </aside>
 
+</div>
 </main>
 <!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay">

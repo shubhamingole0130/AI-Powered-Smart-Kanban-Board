@@ -503,6 +503,112 @@ header {
   color: #888;
   font-style: italic;
 }
+/* ---- APP LAYOUT ---- */
+.app-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.board {
+  flex: 1;
+  min-width: 0; /* prevents flex overflow */
+}
+
+/* ---- ACTIVITY SIDEBAR ---- */
+.activity-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  background: white;
+  border-left: 1px solid #eee;
+  height: calc(100vh - 110px);
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+  flex-shrink: 0;
+}
+
+.sidebar-header h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.clear-feed-btn {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  color: #888;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.clear-feed-btn:hover {
+  background: #f5f5f5;
+  color: #333;
+}
+
+/* ---- ACTIVITY FEED LIST ---- */
+.activity-feed {
+  list-style: none;
+  overflow-y: auto;
+  flex: 1;
+  padding: 0.5rem 0;
+}
+
+.feed-empty {
+  padding: 1rem;
+  font-size: 0.8rem;
+  color: #bbb;
+  text-align: center;
+}
+
+/* ---- FEED ITEM ---- */
+.feed-item {
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid #f5f5f5;
+  animation: slideIn 0.2s ease;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(10px); }
+  to   { opacity: 1; transform: translateX(0);    }
+}
+
+.feed-item-message {
+  font-size: 0.8rem;
+  color: #444;
+  line-height: 1.4;
+  margin-bottom: 3px;
+}
+
+.feed-item-message strong {
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.feed-item-time {
+  font-size: 0.7rem;
+  color: #bbb;
+}
+
+/* ---- FEED ITEM TYPE COLORS ---- */
+.feed-item.type-created  { border-left: 3px solid #2ecc71; }
+.feed-item.type-deleted  { border-left: 3px solid #e74c3c; }
+.feed-item.type-moved    { border-left: 3px solid #3498db; }
+.feed-item.type-edited   { border-left: 3px solid #f39c12; }
 .empty-msg {
   font-size: 0.8rem;
   color: #bbb;

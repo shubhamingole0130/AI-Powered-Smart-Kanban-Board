@@ -3,7 +3,7 @@
 // ============================================
 
 import { tasks, addTask, updateTask } from './state.js';
-import { render } from './render.js';
+import { logActivity } from './activity.js';
 
 // DOM elements
 const modalOverlay = document.getElementById('modalOverlay');
@@ -16,9 +16,9 @@ export let activeColumn = null;
 
 // ---- OPEN MODAL (create mode) ----
 export function openCreateModal(column) {
-  modalMode    = 'create';
-  editingId    = null;
-  activeColumn = column;
+  modalMode      = 'create';
+  editingId      = null;
+  activeColumn   = column;
   modalTitle.textContent = 'Add New Task';
   clearForm();
   modalOverlay.classList.add('active');
@@ -29,11 +29,9 @@ export function openEditModal(id) {
   modalMode = 'edit';
   editingId = id;
 
-  // Find the task
   const task = tasks.find(t => t.id === id);
   if (!task) return;
 
-  // Pre-fill form with existing values
   document.getElementById('taskTitle').value    = task.title;
   document.getElementById('taskDesc').value     = task.desc;
   document.getElementById('taskLabel').value    = task.label;
@@ -75,21 +73,26 @@ export function handleSubmit() {
   }
 
   if (modalMode === 'create') {
-    addTask({
-      id: Date.now(),
+    const newTask = {
+      id:       Date.now(),
       title,
       desc:     desc || 'No description',
       label:    label || 'feature',
       assignee: assignee || 'Unassigned',
       priority: priority || 'medium',
       column:   activeColumn
-    });
+    };
+    addTask(newTask);
+    logActivity('created', `<strong>${newTask.assignee}</strong> created "<strong>${newTask.title}</strong>"`);
+
   } else {
-    // Edit mode — update existing task
     updateTask(editingId, { title, desc, label, assignee, priority });
+    logActivity('edited', `<strong>${assignee}</strong> edited "<strong>${title}</strong>"`);
   }
 
-  render();
+  // ✅ Fire custom event instead of calling render() directly
+  document.dispatchEvent(new CustomEvent('tasksupdated'));
+
   closeModalFn();
 }
 

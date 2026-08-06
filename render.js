@@ -5,7 +5,7 @@ import { setupDragOnCards, setupDropZones } from './drag.js';
 import { tasks } from './state.js';
 import { openEditModal } from './modal.js';
 import { getFilteredTasks ,activeFilters} from './filters.js';
-
+import { logActivity } from './activity.js';
 export function buildCard(task) {
   return `
     
@@ -58,15 +58,23 @@ export function render() {
 
     // Event delegation for delete and edit
     container.addEventListener('click', (e) => {
-      if (e.target.classList.contains('delete-btn')) {
-        const id = Number(e.target.dataset.id);
-        deleteTaskAndRender(id);
-      }
-      if (e.target.classList.contains('edit-btn')) {
-        const id = Number(e.target.dataset.id);
-        openEditModal(id);
-      }
-    });
+  if (e.target.classList.contains('delete-btn')) {
+    const id = Number(e.target.dataset.id);
+
+    // Find task before deleting to get its title
+    const task = tasks.find(t => t.id === id);
+    if (task) {
+      logActivity('deleted', `<strong>${task.assignee}</strong> deleted "<strong>${task.title}</strong>"`);
+    }
+
+    deleteTaskAndRender(id);
+  }
+
+  if (e.target.classList.contains('edit-btn')) {
+    const id = Number(e.target.dataset.id);
+    openEditModal(id);
+  }
+});
   });
 
   // Setup drag after cards are drawn

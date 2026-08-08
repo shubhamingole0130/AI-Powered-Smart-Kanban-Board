@@ -603,6 +603,58 @@ header {
   font-size: 0.7rem;
   color: #bbb;
 }
+/* ---- HEADER ---- */
+header {
+  padding: 1rem 2rem;
+  background: #2c2c2c;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+/* ---- ONLINE DOT ---- */
+.online-dot {
+  width: 8px;
+  height: 8px;
+  background: #2ecc71;
+  border-radius: 50%;
+  display: inline-block;
+  animation: blink 2s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1;   }
+  50%       { opacity: 0.3; }
+}
+.pause-btn {
+  padding: 3px 10px;
+  font-size: 0.75rem;
+  background: transparent;
+  border: 1px solid #555;
+  border-radius: 4px;
+  color: #aaa;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.pause-btn:hover {
+  background: #444;
+  color: white;
+}
 
 /* ---- FEED ITEM TYPE COLORS ---- */
 .feed-item.type-created  { border-left: 3px solid #2ecc71; }

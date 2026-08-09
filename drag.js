@@ -130,7 +130,7 @@ export function setupDropZones() {
 
         if (currentTask && currentTask.column !== newColumn) {
           updateTask(id, { column: newColumn });
-          render();
+          
           setupDragOnCards();
           setupDropZones();
         }

@@ -3,6 +3,7 @@
 // ============================================
 import { setupDragOnCards, setupDropZones } from './drag.js';
 import { tasks } from './state.js';
+// import { tasks, deleteTask } from './state.js';
 import { openEditModal } from './modal.js';
 import { getFilteredTasks ,activeFilters} from './filters.js';
 import { logActivity } from './activity.js';
@@ -67,7 +68,8 @@ export function render() {
       logActivity('deleted', `<strong>${task.assignee}</strong> deleted "<strong>${task.title}</strong>"`);
     }
 
-    deleteTaskAndRender(id);
+  deleteTask(id); // notify() fires inside deleteTask automatically
+
   }
 
   if (e.target.classList.contains('edit-btn')) {

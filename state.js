@@ -1,7 +1,8 @@
 // ============================================
 // STATE.JS — single source of truth
-// ============================================
-
+// ======================
+// ======================
+import { notify } from './store.js';
 export let tasks = [];
 
 export function saveTasks() {
@@ -21,6 +22,7 @@ export function loadTasks() {
 export function addTask(newTask) {
   tasks.push(newTask);
   saveTasks();
+  notify();
 }
 
 export function deleteTask(id) {
@@ -28,6 +30,7 @@ export function deleteTask(id) {
   const index = tasks.findIndex(t => t.id === id);
   if (index !== -1) tasks.splice(index, 1);
   saveTasks();
+  notify();
 }
 
 export function updateTask(id, updatedFields) {
@@ -37,4 +40,5 @@ export function updateTask(id, updatedFields) {
     tasks[index] = { ...tasks[index], ...updatedFields };
   }
   saveTasks();
+  notify();
 }

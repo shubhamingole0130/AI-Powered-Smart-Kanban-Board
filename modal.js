@@ -90,9 +90,7 @@ export function handleSubmit() {
     logActivity('edited', `<strong>${assignee}</strong> edited "<strong>${title}</strong>"`);
   }
 
-  // ✅ Fire custom event instead of calling render() directly
-  document.dispatchEvent(new CustomEvent('tasksupdated'));
-
+  
   closeModalFn();
 }
 

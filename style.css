@@ -655,6 +655,23 @@ header h1 {
   background: #444;
   color: white;
 }
+/* ---- CHART MODAL ---- */
+.chart-modal {
+  max-width: 620px;
+}
+
+.chart-hint {
+  font-size: 0.75rem;
+  color: #aaa;
+  text-align: center;
+  margin-top: 0.75rem;
+}
+
+#velocityChart {
+  width: 100%;
+  height: auto;
+  display: block;
+}
 
 /* ---- FEED ITEM TYPE COLORS ---- */
 .feed-item.type-created  { border-left: 3px solid #2ecc71; }

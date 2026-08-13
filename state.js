@@ -37,6 +37,11 @@ export function updateTask(id, updatedFields) {
   // ✅ Mutate in place
   const index = tasks.findIndex(t => t.id === id);
   if (index !== -1) {
+
+    if(updatedFields.column==='done' && tasks[index].column!=='done'){
+      updatedFields.completedAt=Date.now();
+      console.log('✅ completedAt saved:', updatedFields.completedAt);
+    }
     tasks[index] = { ...tasks[index], ...updatedFields };
   }
   saveTasks();

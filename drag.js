@@ -102,40 +102,45 @@ export function setupDropZones() {
       }
     });
 
-    col.addEventListener('drop', (e) => {
-      e.preventDefault();
-      col.classList.remove('drag-over');  // ✅ now correctly using col
+   col.addEventListener('drop', (e) => {
+  e.preventDefault();
+  col.classList.remove('drag-over');
 
-      const newColumn = col.id;
-      const id = Number(e.dataTransfer.getData('text/plain'));
+  const newColumn = col.id;
+  const id = Number(e.dataTransfer.getData('text/plain'));
 
-      if (placeholder && placeholder.parentNode) {
-        placeholder.parentNode.removeChild(placeholder);
-        placeholder = null;
-      }
+  if (placeholder && placeholder.parentNode) {
+    placeholder.parentNode.removeChild(placeholder);
+    placeholder = null;
+  }
 
-      if (id && newColumn) {
-        const currentTask = tasks.find(t => t.id === id);
+  if (!id || !newColumn) return;
 
-         const colNames = {
-        'todo': 'To Do',
-        'in-progress': 'In Progress',
-        'done': 'Done'
-      };
+  const currentTask = tasks.find(t => t.id === id);
+  if (!currentTask) return;
 
-      logActivity(
-        'moved',
-        `<strong>${currentTask.assignee}</strong> moved "<strong>${currentTask.title}</strong>" to <strong>${colNames[newColumn]}</strong>`
-      );
+  // Only act if column actually changed
+  if (currentTask.column !== newColumn) {
+    const colNames = {
+      'todo':        'To Do',
+      'in-progress': 'In Progress',
+      'done':        'Done'
+    };
 
-        if (currentTask && currentTask.column !== newColumn) {
-          updateTask(id, { column: newColumn });
-          
-          setupDragOnCards();
-          setupDropZones();
-        }
-      }
-    });
+    // ✅ updateTask FIRST — this sets completedAt if moving to done
+    updateTask(id, { column: newColumn });
+
+    // Then log activity
+    logActivity(
+      'moved',
+      `<strong>${currentTask.assignee}</strong> moved "<strong>${currentTask.title}</strong>" to <strong>${colNames[newColumn]}</strong>`
+    );
+
+    setupDragOnCards();
+    setupDropZones();
+  }
+});
+   
 
   });
 }

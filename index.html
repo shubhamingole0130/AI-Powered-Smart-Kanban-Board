@@ -12,7 +12,9 @@
   <span class="online-dot" id="onlineDot"></span>
   <span id="onlineCount">0 online</span>
   <button class="pause-btn" id="pauseSimulation">⏸ Pause</button>
+  <button class="pause-btn" id="toggleChart">📊 Chart</button>
 </div>
+
 
   <div class="header-left">
     <h1>Smart Kanban Board</h1>
@@ -138,6 +140,18 @@
 </div>
 
   <script src="script.js" type="module"></script>
-  
+  <!-- CHART MODAL -->
+<div class="modal-overlay" id="chartOverlay">
+  <div class="modal chart-modal">
+    <div class="modal-header">
+      <h3>Team Velocity — Tasks Completed Per Day</h3>
+      <button class="close-btn" id="closeChart">&times;</button>
+    </div>
+    <div class="modal-body">
+      <canvas id="velocityChart" width="560" height="300"></canvas>
+      <p class="chart-hint">Each bar shows how many tasks were completed that day</p>
+    </div>
+  </div>
+</div>
 </body>
 </html>

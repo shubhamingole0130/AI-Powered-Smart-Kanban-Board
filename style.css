@@ -672,6 +672,57 @@ header h1 {
   height: auto;
   display: block;
 }
+/* ---- AI SUGGEST BUTTON ---- */
+.ai-suggest-btn {
+  width: 100%;
+  padding: 0.5rem;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  margin-top: 2px;
+}
+
+.ai-suggest-btn:hover {
+  opacity: 0.9;
+}
+
+.ai-suggest-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ---- AI RESULT BOX ---- */
+.ai-result {
+  padding: 0.5rem 0.75rem;
+  background: #f8f5ff;
+  border: 1px solid #d4c5f9;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  color: #5a3e9b;
+  margin-top: 4px;
+}
+
+/* ---- LOADING SPINNER ---- */
+.ai-loading {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #d4c5f9;
+  border-top-color: #764ba2;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
 
 /* ---- FEED ITEM TYPE COLORS ---- */
 .feed-item.type-created  { border-left: 3px solid #2ecc71; }

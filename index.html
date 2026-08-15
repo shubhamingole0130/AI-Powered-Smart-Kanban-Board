@@ -108,6 +108,12 @@
 
       <label>Title <span class="required">*</span></label>
       <input type="text" id="taskTitle" placeholder="e.g. Fix login bug" />
+      <button type="button" class="ai-suggest-btn" id="aiSuggestPriority">
+  ✨ AI Suggest Priority
+</button>
+<div class="ai-result" id="aiResult" style="display:none;">
+  <span id="aiResultText"></span>
+</div>
 
       <label>Description</label>
       <textarea id="taskDesc" placeholder="What needs to be done?"></textarea>

@@ -4,6 +4,7 @@
 
 import { tasks, addTask, updateTask } from './state.js';
 import { logActivity } from './activity.js';
+import { getPriorityScore } from './ai.js';
 
 // DOM elements
 const modalOverlay = document.getElementById('modalOverlay');
@@ -57,6 +58,8 @@ function clearForm() {
   document.getElementById('taskAssignee').value = '';
   document.getElementById('taskLabel').value    = 'feature';
   document.getElementById('taskPriority').value = 'medium';
+   document.getElementById('aiResult').style.display = 'none';
+  document.getElementById('aiSuggestPriority').textContent = '✨ AI Suggest Priority';
 }
 
 // ---- SUBMIT HANDLER ----
@@ -111,4 +114,44 @@ document.querySelectorAll('.add-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     openCreateModal(btn.dataset.column);
   });
+});
+
+// ---- AI PRIORITY SUGGEST ----
+document.getElementById('aiSuggestPriority').addEventListener('click', async () => {
+  const title = document.getElementById('taskTitle').value.trim();
+  const desc  = document.getElementById('taskDesc').value.trim();
+
+  if (!title) {
+    alert('Please enter a task title first');
+    return;
+  }
+
+  const btn       = document.getElementById('aiSuggestPriority');
+  const resultBox = document.getElementById('aiResult');
+  const resultTxt = document.getElementById('aiResultText');
+
+  // Show loading state
+  btn.disabled     = true;
+  btn.textContent  = 'Analyzing...';
+  resultBox.style.display = 'block';
+  resultTxt.innerHTML = '<span class="ai-loading"></span> AI is thinking...';
+
+  try {
+    const priority = await getPriorityScore(title, desc);
+
+    // Show result
+    const emoji = { high: '🔴', medium: '🟡', low: '🟢' };
+    resultTxt.innerHTML = `AI suggests: <strong>${emoji[priority]} ${priority} priority</strong>`;
+
+    // Auto-set the priority dropdown
+    document.getElementById('taskPriority').value = priority;
+
+    btn.textContent = '✨ AI Suggest Priority';
+    btn.disabled    = false;
+
+  } catch (err) {
+    resultTxt.textContent = '❌ Could not get suggestion. Try again.';
+    btn.textContent       = '✨ AI Suggest Priority';
+    btn.disabled          = false;
+  }
 });

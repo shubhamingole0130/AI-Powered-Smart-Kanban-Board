@@ -12,7 +12,9 @@
   <span class="online-dot" id="onlineDot"></span>
   <span id="onlineCount">0 online</span>
   <button class="pause-btn" id="pauseSimulation">⏸ Pause</button>
+  
   <button class="pause-btn" id="toggleChart">📊 Chart</button>
+    <button class="pause-btn report-btn" id="generateReport">📝 Sprint Report</button>
 </div>
 
 
@@ -157,6 +159,31 @@
       <canvas id="velocityChart" width="560" height="300"></canvas>
       <p class="chart-hint">Each bar shows how many tasks were completed that day</p>
     </div>
+  </div>
+</div>
+<!-- SPRINT REPORT MODAL -->
+<div class="modal-overlay" id="reportOverlay">
+  <div class="modal report-modal">
+
+    <div class="modal-header">
+      <h3>📝 AI Sprint Report</h3>
+      <button class="close-btn" id="closeReport">&times;</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="report-meta" id="reportMeta"></div>
+      <div class="report-content" id="reportContent">
+        <div class="report-placeholder">
+          <p>Click Generate to create an AI-powered sprint report from your completed tasks.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-cancel" id="cancelReport">Close</button>
+      <button class="btn-submit" id="triggerReport">✨ Generate with AI</button>
+    </div>
+
   </div>
 </div>
 </body>
